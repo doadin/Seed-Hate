@@ -39,11 +39,8 @@
 from __future__ import unicode_literals
 
 import logging
-import re
-import threading
 import time
 import twisted
-from datetime import datetime
 from twisted.internet.task import LoopingCall
 from twisted.internet import reactor
 import deluge.component as component
@@ -113,10 +110,9 @@ class Core(CorePluginBase):
         log.debug("update_checker in")
         for torrent_id in torrentmanager.get_torrent_list():
             torrent = torrentmanager.torrents.get(torrent_id, None)
-            finished = torrent.is_finished
 
-            if torrent.state == "Seeding" or finished:
-                torrentmanager.remove(torrent_id)
+            if torrent.state == "Seeding":
+                torrentmanager.pause(torrent_id)
 
     # Plugin hooks #
     def post_torrent_add(self, torrent_id, from_state=None):
