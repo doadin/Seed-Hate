@@ -49,7 +49,7 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: deluge-py${{ matrix.python }}-lt${{ matrix.libtorrent }}-${{ matrix.arch }}
+          name: SeedHate-py${{ matrix.python }}
           path: dist/*.egg
 
       - name: Release
@@ -57,5 +57,5 @@ jobs:
         with:
           name: latest
           tag_name: latest
-          body: gvsbuild-${{ steps.date.outputs.date }}
+          body: ${{ steps.date.outputs.date }}
           files: "dist/*.egg"
