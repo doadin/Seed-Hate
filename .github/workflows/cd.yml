@@ -19,18 +19,18 @@ jobs:
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python}}
           architecture: ${{ matrix.arch }}
 
       - name: Cache pip
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: '%LOCALAPPDATA%\pip\Cache'
           # Look to see if there is a cache hit for the corresponding requirements file
@@ -46,7 +46,7 @@ jobs:
         run: |
           python setup.py bdist_egg
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: SeedHate-py${{ matrix.python }}
           path: dist/*.egg
