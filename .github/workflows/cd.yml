@@ -15,8 +15,7 @@ jobs:
     strategy:
       matrix:
         arch: [x64]
-        python: ["3.6","3.7","3.8","3.9","3.10"]
-        fail-fast: false
+        python: ["3.7","3.8","3.9","3.10"]
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
