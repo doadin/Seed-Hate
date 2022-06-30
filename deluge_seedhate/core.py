@@ -105,14 +105,9 @@ class Core(CorePluginBase):
 
     def update_checker(self):
         time.sleep(1)
-        torrentmanager = component.get("TorrentManager")
-
-        log.debug("update_checker in")
-        for torrent_id in torrentmanager.get_torrent_list():
-            torrent = torrentmanager.torrents.get(torrent_id, None)
-
+        for torrent in component.get("Core").torrentmanager.torrents.values():
             if torrent.state == "Seeding":
-                torrentmanager.pause(torrent_id)
+                torrent.pause()
 
     # Plugin hooks #
     def post_torrent_add(self, torrent_id, from_state=None):
